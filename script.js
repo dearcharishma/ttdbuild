@@ -16,11 +16,6 @@ function calculateGap() {
     const timeDiff = today.getTime() - lastDate.getTime();
     const daysPassed = Math.floor(timeDiff / (1000 * 3600 * 24));
 
-    if (daysPassed < 0) {
-        alert("Date cannot be in the future.");
-        return;
-    }
-
     // --- RULES ENGINE ---
     let requiredGap = 0; 
 
@@ -87,7 +82,6 @@ function calculateGap() {
     }
 
     // 5. NO GAP (Implicitly 0 for everything else)
-    // Includes: Tokenless Sarva, Srivani, Online Lucky->Offline Lucky, Tirumala Room <-> Tirupati Room
     
     const daysRemaining = requiredGap - daysPassed;
     showModal(daysRemaining, requiredGap, lastDate);
@@ -127,7 +121,13 @@ function showModal(daysRemaining, requiredGap, lastDate) {
         eligibleDate.setDate(lastDate.getDate() + requiredGap);
         const dateString = eligibleDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
         
-        msg.innerHTML = `You need to wait <strong>${daysRemaining} more days</strong>.<br>Gap Required: ${requiredGap} Days<br>Next eligible date: <br><span style="color:#FFD700; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px;">${dateString}</span>`;
+        // Modified message logic to handle future dates appropriately
+        if (daysRemaining > requiredGap) {
+                // This happens when a future date is selected
+                msg.innerHTML = `Based on your planned visit.<br>Gap Required: ${requiredGap} Days<br>Next eligible date: <br><span style="color:#FFD700; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px;">${dateString}</span>`;
+        } else {
+                msg.innerHTML = `You need to wait <strong>${daysRemaining} more days</strong>.<br>Gap Required: ${requiredGap} Days<br>Next eligible date: <br><span style="color:#FFD700; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px;">${dateString}</span>`;
+        }
     }
 
     modal.classList.add('active');
