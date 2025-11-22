@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTD Gap Calculator by Sevaks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="glass-card">
+        <div class="header">
+            <img src="https://play-lh.googleusercontent.com/H9Sw9qffHZQJD4e8fng7e79iFx1BNW-iASHLAjuuFybFvCqMxvKQ9o1P5Tp3SEyYkUdC=w600-h300-pc0xffffff-pd" alt="Lord Venkateswara" class="header-logo">
+            <h1> TTD Gap Calculator</h1>
+            <p>Powered by Tirumala Balaji Sevaks</p>
+        </div>
+
+        <div class="form-section">
+            <label class="form-label">1. Previous Visit</label>
+            <select id="prevDarshan" class="form-control" style="margin-bottom: 15px;">
+                <option value="" disabled selected>Select Previous Category...</option>
+                
+                <optgroup label="Darshan Types">
+                    <option value="sed">₹300 Special Entry Darshan</option>
+                    <option value="ssd_free">Free SSD Tokens (General)</option>
+                    <option value="ssd_local">Free SSD Tokens (Locals)</option>
+                    <option value="footpath">Free DD Token (Footpath)</option>
+                    <option value="sarva_no_tkt">Tokenless Sarvadarshan</option>
+                    <option value="srivani">Srivani Trust</option>
+                    <option value="infant">Infant Baby Darshan</option>
+                </optgroup>
+
+                <optgroup label="Sevas & Lucky Dips">
+                    <option value="lucky_online">Online Lucky Dip</option>
+                    <option value="lucky_offline">Offline Lucky Dip</option>
+                    <option value="arjitha">Arjitha / Periodic Sevas</option>
+                    <option value="virtual">Virtual Seva Darshan</option>
+                    <option value="anga">Angapradakshinam</option>
+                    <option value="homam">Homam</option>
+                    <option value="voluntary">Srivari Seva (Voluntary)</option>
+                </optgroup>
+
+                <optgroup label="Accommodation">
+                    <option value="room_tiru_online">Tirumala Online Room</option>
+                    <option value="room_tiru_offline">Tirumala Offline Room</option>
+                    <option value="room_tpt_online">Tirupati Online Room</option>
+                    <option value="room_tpt_offline">Tirupati Offline Room</option>
+                </optgroup>
+            </select>
+            <input type="date" id="prevDate" class="form-control">
+        </div>
+
+        <div class="form-section">
+            <label class="form-label">2. Next Visit</label>
+            <select id="nextDarshan" class="form-control">
+                <option value="" disabled selected>Select Next Category...</option>
+                
+                <optgroup label="Darshan Types">
+                    <option value="sed">₹300 Special Entry Darshan</option>
+                    <option value="ssd_free">Free SSD Tokens (General)</option>
+                    <option value="ssd_local">Free SSD Tokens (Locals)</option>
+                    <option value="footpath">Free DD Token (Footpath)</option>
+                    <option value="sarva_no_tkt">Tokenless Sarvadarshan</option>
+                    <option value="srivani">Srivani Trust</option>
+                    <option value="infant">Infant Baby Darshan</option>
+                </optgroup>
+
+                <optgroup label="Sevas & Lucky Dips">
+                    <option value="lucky_online">Online Lucky Dip</option>
+                    <option value="lucky_offline">Offline Lucky Dip</option>
+                    <option value="arjitha">Arjitha / Periodic Sevas</option>
+                    <option value="virtual">Virtual Seva Darshan</option>
+                    <option value="anga">Angapradakshinam</option>
+                    <option value="homam">Homam</option>
+                    <option value="voluntary">Srivari Seva (Voluntary)</option>
+                </optgroup>
+
+                <optgroup label="Accommodation">
+                    <option value="room_tiru_online">Tirumala Online Room</option>
+                    <option value="room_tiru_offline">Tirumala Offline Room</option>
+                    <option value="room_tpt_online">Tirupati Online Room</option>
+                    <option value="room_tpt_offline">Tirupati Offline Room</option>
+                </optgroup>
+            </select>
+        </div>
+
+        <button class="btn-premium" onclick="calculateGap()">Check Eligibility</button>
+    </div>
+
+    <div class="modal-overlay" id="resultModal">
+        <div class="modal-content" id="modalContent">
+            <div class="modal-icon" id="modalIcon"></div>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            <p class="modal-msg" id="modalMsg"></p>
+            <button class="btn-close" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
