@@ -45,7 +45,7 @@ body::before {
     overflow: hidden;
 }
 
-/* --- AUDIO CONTROL BUTTON (Updated to be small and cute, no circle) --- */
+/* --- AUDIO CONTROL (Updated Logic) --- */
 .audio-control {
     position: absolute;
     top: 25px;
@@ -54,15 +54,33 @@ body::before {
     border: none;
     cursor: pointer;
     z-index: 10;
-    color: rgba(255, 255, 255, 0.5); /* Subtle white */
-    font-size: 1.3rem; /* Small and cute size */
+    font-size: 1.5rem; /* Stylish size */
+    font-weight: 300; /* Slim font weight */
     transition: all 0.3s ease;
+    width: 30px; 
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* Default / Muted / Disabled State */
+    color: rgba(255, 255, 255, 0.4); /* Grey/Disabled look */
 }
 
+/* Hover state for Grey icon (subtle) */
 .audio-control:hover {
-    color: #FFD700; /* Gold glow on hover */
-    transform: scale(1.15) rotate(10deg); /* Slight playful tilt */
-    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+}
+
+/* PLAYING STATE - Turns Gold */
+.audio-control.playing {
+    color: #FFD700;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6));
+}
+
+.audio-control.playing:hover {
+    transform: scale(1.1) rotate(10deg);
 }
 
 /* --- HEADER WITH LOGO --- */
