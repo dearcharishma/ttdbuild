@@ -45,7 +45,7 @@ body::before {
     overflow: hidden;
 }
 
-/* --- AUDIO CONTROL (Updated Logic) --- */
+/* --- AUDIO CONTROL --- */
 .audio-control {
     position: absolute;
     top: 25px;
