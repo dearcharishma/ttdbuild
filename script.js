@@ -1,23 +1,23 @@
 /* --- AUDIO CONTROL LOGIC --- */
 const bgMusic = document.getElementById('bgMusic');
-const speakerIcon = document.getElementById('speakerIcon');
+const audioControlBtn = document.querySelector('.audio-control');
 let isPlaying = false; // Start False
 
 // On load, default to Muted/Paused
 window.addEventListener('load', () => {
     bgMusic.pause();
     isPlaying = false;
-    speakerIcon.innerHTML = '🔇';
+    audioControlBtn.classList.remove('playing'); // Ensure it is Grey
 });
 
 function toggleAudio() {
     if (isPlaying) {
         bgMusic.pause();
-        speakerIcon.innerHTML = '🔇';
+        audioControlBtn.classList.remove('playing'); // Turn Grey
         isPlaying = false;
     } else {
         bgMusic.play();
-        speakerIcon.innerHTML = '🎵';
+        audioControlBtn.classList.add('playing'); // Turn Gold
         isPlaying = true;
     }
 }
@@ -55,17 +55,22 @@ function calculateGap() {
     }
 
     // 2. 90 DAYS GAP RULES
-    // Locals interactions with Locals, Free SSD, or Footpath (DD)
+    // SSD Local -> Any SSD/Local/Footpath = 90
     else if (
-        (prevType === 'ssd_local' && (nextType === 'ssd_local' || nextType === 'ssd_free' || nextType === 'footpath')) ||
-        ((prevType === 'ssd_free' || prevType === 'footpath') && nextType === 'ssd_local')
+        prevType === 'ssd_local' && 
+        (nextType === 'ssd_local' || nextType === 'ssd_free' || nextType === 'footpath')
     ) {
         requiredGap = 90;
     }
-    // Other 90 day rules
+    // Senior Citizen -> Senior Citizen (Updated as requested)
+    else if (prevType === 'senior' && nextType === 'senior') {
+        requiredGap = 90;
+    }
+    // Voluntary -> Voluntary
     else if (prevType === 'voluntary' && nextType === 'voluntary') {
         requiredGap = 90;
     }
+    // Anga -> Anga
     else if (prevType === 'anga' && nextType === 'anga') {
         requiredGap = 90;
     }
@@ -77,21 +82,24 @@ function calculateGap() {
 
     // 4. 30 DAYS GAP RULES
     
-    // NEW RULES
-    // Senior Citizen - Senior Citizen
-    else if (prevType === 'senior' && nextType === 'senior') {
-        requiredGap = 90;
-    }
-    // Local Temple Seva - Local Temple Seva
-    else if (prevType === 'local_seva' && nextType === 'local_seva') {
+    // SSD General/Footpath -> SSD Local (Vice Versa of the 90 day rule)
+    else if (
+        (prevType === 'ssd_free' || prevType === 'footpath') && 
+        nextType === 'ssd_local'
+    ) {
         requiredGap = 30;
     }
 
-    // General Free SSD / DD (Footpath) Interactions
+    // General Free SSD / DD (Footpath) Interactions (General -> General)
     else if (
         (prevType === 'ssd_free' || prevType === 'footpath') &&
         (nextType === 'ssd_free' || nextType === 'footpath')
     ) {
+        requiredGap = 30;
+    }
+    
+    // Local Temple Seva - Local Temple Seva
+    else if (prevType === 'local_seva' && nextType === 'local_seva') {
         requiredGap = 30;
     }
     // Same Category Restrictions
