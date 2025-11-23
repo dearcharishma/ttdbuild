@@ -44,6 +44,7 @@ function calculateGap() {
 
     // --- RULES ENGINE ---
     let requiredGap = 0; 
+    let isStrictNextDay = false; // Special flag for the "Next Day" exception
 
     // 1. 180 DAYS GAP RULES
     if (
@@ -62,7 +63,7 @@ function calculateGap() {
     ) {
         requiredGap = 90;
     }
-    // Senior Citizen -> Senior Citizen (Updated as requested)
+    // Senior Citizen -> Senior Citizen (90 days)
     else if (prevType === 'senior' && nextType === 'senior') {
         requiredGap = 90;
     }
@@ -75,9 +76,10 @@ function calculateGap() {
         requiredGap = 90;
     }
 
-    // 3. 1 DAY GAP RULE
+    // 3. 1 DAY GAP RULE (Specific Exception)
     else if (prevType === 'voluntary' && nextType === 'lucky_offline') {
         requiredGap = 1;
+        isStrictNextDay = true; // Mark this so we don't add the extra +1 safe day
     }
 
     // 4. 30 DAYS GAP RULES
@@ -128,11 +130,24 @@ function calculateGap() {
 
     // 5. NO GAP (Implicitly 0 for everything else)
     
-    const daysRemaining = requiredGap - daysPassed;
-    showModal(daysRemaining, requiredGap, lastDate);
+    // --- SAFE DATE LOGIC ---
+    let safeGap = requiredGap;
+    
+    if (requiredGap > 0) {
+        if (isStrictNextDay) {
+            // For Voluntary -> Lucky Offline, keep it exactly 1 day (next day)
+            safeGap = requiredGap; 
+        } else {
+            // For everything else, add 1 extra day for safety
+            safeGap = requiredGap + 1; 
+        }
+    }
+
+    const daysRemaining = safeGap - daysPassed;
+    showModal(daysRemaining, requiredGap, safeGap, lastDate);
 }
 
-function showModal(daysRemaining, requiredGap, lastDate) {
+function showModal(daysRemaining, requiredGap, safeGap, lastDate) {
     const modal = document.getElementById('resultModal');
     const content = document.getElementById('modalContent');
     const icon = document.getElementById('modalIcon');
@@ -163,7 +178,7 @@ function showModal(daysRemaining, requiredGap, lastDate) {
         title.style.color = '#e74c3c'; // Soft Red
         
         const eligibleDate = new Date(lastDate);
-        eligibleDate.setDate(lastDate.getDate() + requiredGap);
+        eligibleDate.setDate(lastDate.getDate() + safeGap); // Use calculated safeGap
         const dateString = eligibleDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
         
         if (daysRemaining > requiredGap) {
