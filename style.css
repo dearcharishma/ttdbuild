@@ -45,30 +45,24 @@ body::before {
     overflow: hidden;
 }
 
-/* --- AUDIO CONTROL BUTTON --- */
+/* --- AUDIO CONTROL BUTTON (Updated to be small and cute, no circle) --- */
 .audio-control {
     position: absolute;
-    top: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 215, 0, 0.3);
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    top: 25px;
+    right: 25px;
+    background: transparent;
+    border: none;
     cursor: pointer;
     z-index: 10;
-    color: #FFD700;
-    font-size: 1.2rem;
-    transition: 0.3s;
+    color: rgba(255, 255, 255, 0.5); /* Subtle white */
+    font-size: 1.3rem; /* Small and cute size */
+    transition: all 0.3s ease;
 }
 
 .audio-control:hover {
-    background: rgba(0, 0, 0, 0.8);
-    transform: scale(1.1);
-    border-color: #FFD700;
+    color: #FFD700; /* Gold glow on hover */
+    transform: scale(1.15) rotate(10deg); /* Slight playful tilt */
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
 }
 
 /* --- HEADER WITH LOGO --- */
