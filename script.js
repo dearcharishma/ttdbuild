@@ -1,3 +1,47 @@
+/* --- AUDIO CONTROL LOGIC --- */
+const bgMusic = document.getElementById('bgMusic');
+const speakerIcon = document.getElementById('speakerIcon');
+let isPlaying = false;
+
+// Attempt to play on load (may be blocked by browser)
+window.addEventListener('load', () => {
+    // We try to play, if it fails, we wait for first interaction
+    const playPromise = bgMusic.play();
+    if (playPromise !== undefined) {
+        playPromise.then(_ => {
+            // Autoplay started!
+            isPlaying = true;
+            speakerIcon.innerHTML = '🔊';
+        }).catch(error => {
+            // Autoplay was prevented.
+            // Setup a one-time click listener on body to start music
+            document.body.addEventListener('click', startAudioOnFirstInteraction, { once: true });
+        });
+    }
+});
+
+function startAudioOnFirstInteraction() {
+    bgMusic.play();
+    isPlaying = true;
+    speakerIcon.innerHTML = '🔊';
+}
+
+function toggleAudio() {
+    // Remove the one-time listener if user clicks the button manually
+    document.body.removeEventListener('click', startAudioOnFirstInteraction);
+    
+    if (isPlaying) {
+        bgMusic.pause();
+        speakerIcon.innerHTML = '🔇';
+    } else {
+        bgMusic.play();
+        speakerIcon.innerHTML = '🔊';
+    }
+    isPlaying = !isPlaying;
+}
+
+
+/* --- CALCULATOR LOGIC --- */
 function calculateGap() {
     const prevType = document.getElementById('prevDarshan').value;
     const prevDateVal = document.getElementById('prevDate').value;
@@ -50,6 +94,17 @@ function calculateGap() {
     }
 
     // 4. 30 DAYS GAP RULES
+    
+    // NEW RULES ADDED HERE
+    // Senior Citizen - Senior Citizen
+    else if (prevType === 'senior' && nextType === 'senior') {
+        requiredGap = 90;
+    }
+    // Local Temple Seva - Local Temple Seva
+    else if (prevType === 'local_seva' && nextType === 'local_seva') {
+        requiredGap = 30;
+    }
+
     // General Free SSD / DD (Footpath) Interactions
     else if (
         (prevType === 'ssd_free' || prevType === 'footpath') &&
