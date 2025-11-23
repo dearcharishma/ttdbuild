@@ -1,43 +1,25 @@
 /* --- AUDIO CONTROL LOGIC --- */
 const bgMusic = document.getElementById('bgMusic');
 const speakerIcon = document.getElementById('speakerIcon');
-let isPlaying = false;
+let isPlaying = false; // Start False
 
-// Attempt to play on load (may be blocked by browser)
+// On load, default to Muted/Paused
 window.addEventListener('load', () => {
-    // We try to play, if it fails, we wait for first interaction
-    const playPromise = bgMusic.play();
-    if (playPromise !== undefined) {
-        playPromise.then(_ => {
-            // Autoplay started!
-            isPlaying = true;
-            speakerIcon.innerHTML = '🔊';
-        }).catch(error => {
-            // Autoplay was prevented.
-            // Setup a one-time click listener on body to start music
-            document.body.addEventListener('click', startAudioOnFirstInteraction, { once: true });
-        });
-    }
+    bgMusic.pause();
+    isPlaying = false;
+    speakerIcon.innerHTML = '🔇';
 });
 
-function startAudioOnFirstInteraction() {
-    bgMusic.play();
-    isPlaying = true;
-    speakerIcon.innerHTML = '🔊';
-}
-
 function toggleAudio() {
-    // Remove the one-time listener if user clicks the button manually
-    document.body.removeEventListener('click', startAudioOnFirstInteraction);
-    
     if (isPlaying) {
         bgMusic.pause();
         speakerIcon.innerHTML = '🔇';
+        isPlaying = false;
     } else {
         bgMusic.play();
-        speakerIcon.innerHTML = '🔊';
+        speakerIcon.innerHTML = '🎵';
+        isPlaying = true;
     }
-    isPlaying = !isPlaying;
 }
 
 
@@ -95,7 +77,7 @@ function calculateGap() {
 
     // 4. 30 DAYS GAP RULES
     
-    // NEW RULES ADDED HERE
+    // NEW RULES
     // Senior Citizen - Senior Citizen
     else if (prevType === 'senior' && nextType === 'senior') {
         requiredGap = 90;
@@ -176,9 +158,8 @@ function showModal(daysRemaining, requiredGap, lastDate) {
         eligibleDate.setDate(lastDate.getDate() + requiredGap);
         const dateString = eligibleDate.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
         
-        // Modified message logic to handle future dates appropriately
         if (daysRemaining > requiredGap) {
-                // This happens when a future date is selected
+                // Future date selected
                 msg.innerHTML = `Based on your planned visit.<br>Gap Required: ${requiredGap} Days<br>Next eligible date: <br><span style="color:#FFD700; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px;">${dateString}</span>`;
         } else {
                 msg.innerHTML = `You need to wait <strong>${daysRemaining} more days</strong>.<br>Gap Required: ${requiredGap} Days<br>Next eligible date: <br><span style="color:#FFD700; font-size:1.2rem; font-weight:bold; display:block; margin-top:5px;">${dateString}</span>`;
