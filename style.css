@@ -7,7 +7,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url('https://t3.ftcdn.net/jpg/01/81/51/46/360_F_181514638_JrKK52a2Rp6gjJRWdRogWiJxJfeuHLcQ.jpg');
+    background-image: url('bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -193,3 +193,4 @@ input:checked + .slider:before { transform: translateX(28px); background: linear
 .star-rating i.active { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
 .star-rating i:hover { transform: scale(1.2); }
 textarea.form-control { min-height: 100px; resize: vertical; margin-top: 10px; }
+
