@@ -1,6 +1,5 @@
-/* --- CSS RESET & BASE --- */
-* { margin: 0; padding: 0; box-sizing: border-box; }
 
+* { margin: 0; padding: 0; box-sizing: border-box; }
 body {
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
@@ -18,7 +17,6 @@ body {
     overflow-x: hidden;
     overflow-y: auto;
 }
-
 body::before {
     content: '';
     position: fixed;
@@ -26,8 +24,6 @@ body::before {
     background: rgba(0, 0, 0, 0.3);
     z-index: 0;
 }
-
-/* --- FALLING FLOWERS --- */
 .flower-container {
     position: fixed;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -35,14 +31,12 @@ body::before {
     z-index: 50;
     overflow: hidden;
 }
-
 .flower {
     position: absolute;
     opacity: 1; 
     will-change: transform, top;
     pointer-events: none;
 }
-
 .flower img {
     width: 100%;
     height: auto;
@@ -50,18 +44,13 @@ body::before {
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4)); 
     -webkit-user-select: none; user-select: none; -webkit-user-drag: none;
 }
-
 @keyframes fall { 0% { top: -15%; } 100% { top: 115%; } }
 @keyframes sway {
     0% { transform: translateX(-20px) rotate(-10deg); }
     50% { transform: translateX(20px) rotate(10deg); }
     100% { transform: translateX(-20px) rotate(-10deg); }
 }
-
-/* --- UTILITY --- */
 .hidden { display: none !important; }
-
-/* --- MAIN GLASS CARD --- */
 .glass-card {
     background: rgba(255, 255, 255, 0.05);
     box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
@@ -76,8 +65,6 @@ body::before {
     position: relative;
     z-index: 2; 
 }
-
-/* --- HEADER ICONS --- */
 .icon-btn {
     position: absolute;
     top: 25px;
@@ -95,15 +82,11 @@ body::before {
     color: rgba(255, 255, 255, 0.4); 
 }
 .icon-btn:hover { color: rgba(255, 255, 255, 0.7); transform: scale(1.1); }
-
 .audio-control { right: 25px; }
 .audio-control.playing { color: #FFD700; filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.6)); }
 .audio-control.playing:hover { transform: scale(1.1) rotate(10deg); }
-
 .feedback-btn { left: 25px; color: #FFD700; }
 .feedback-btn:hover { text-shadow: 0 0 10px #FFD700; }
-
-/* --- HEADER --- */
 .header { margin-bottom: 30px; position: relative; z-index: 2; }
 .header-logo {
     height: 90px; width: auto; margin-bottom: 15px;
@@ -113,8 +96,6 @@ body::before {
 @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-5px); } 100% { transform: translateY(0px); } }
 .header h1 { font-size: 1.6rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
 .header p { color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; }
-
-/* --- FORM ELEMENTS --- */
 .form-section { margin-bottom: 25px; text-align: left; position: relative; z-index: 2; }
 .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: #FFD700; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
 .form-control {
@@ -133,13 +114,9 @@ select.form-control option { background-color: #1a0b0b; color: #FFD700; padding:
 optgroup { background-color: #333; color: #fff; font-weight: bold; }
 input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) sepia(100%) saturate(1000%) hue-rotate(0deg) brightness(100%) contrast(100%); cursor: pointer; opacity: 0.8; }
 .form-control:focus { background: rgba(0, 0, 0, 0.6); border-color: #FFD700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
-
-/* --- SWAP ICON --- */
 .swap-icon-wrapper { text-align: center; margin: -10px 0 10px 0; position: relative; z-index: 5; }
 .swap-icon { color: rgba(255, 255, 255, 0.4); font-size: 1.2rem; cursor: pointer; transition: all 0.3s ease; padding: 5px; }
 .swap-icon:hover { color: #FFD700; text-shadow: 0 0 8px rgba(255, 215, 0, 0.6); transform: scale(1.2); }
-
-/* --- BUTTONS --- */
 .btn-premium {
     width: 100%; padding: 18px; margin-top: 10px; border: none; border-radius: 12px;
     background: linear-gradient(135deg, #D4AF37 0%, #FF8C00 100%);
@@ -147,8 +124,6 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) sepia(
     transition: transform 0.3s, box-shadow 0.3s; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 25px;
 }
 .btn-premium:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255, 140, 0, 0.5); }
-
-/* --- TOGGLE SWITCH --- */
 .mode-switch-container { display: flex; justify-content: center; align-items: center; gap: 15px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
 .mode-label { font-size: 0.9rem; font-weight: 600; color: rgba(255, 255, 255, 0.5); transition: color 0.3s; text-transform: uppercase; letter-spacing: 1px; }
 .mode-label.active { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
@@ -158,11 +133,8 @@ input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1) sepia(
 .slider:before { position: absolute; content: ""; height: 22px; width: 22px; left: 4px; bottom: 3px; background: linear-gradient(135deg, #ccc 0%, #fff 100%); transition: .4s; border-radius: 50%; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
 input:checked + .slider { background-color: rgba(255, 215, 0, 0.2); border-color: #FFD700; }
 input:checked + .slider:before { transform: translateX(28px); background: linear-gradient(135deg, #D4AF37 0%, #FF8C00 100%); }
-
 .version-text { margin-top: 15px; font-size: 0.75rem; color: rgba(255, 255, 255, 0.3); text-transform: uppercase; letter-spacing: 2px; }
 .section-title { color: #FFD700; font-size: 1.2rem; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 10px; }
-
-/* --- MODALS (Shared) --- */
 .modal-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; align-items: center;
@@ -186,8 +158,6 @@ input:checked + .slider:before { transform: translateX(28px); background: linear
 .btn-close:hover { background: rgba(255,255,255,0.1); border-color: #fff; }
 .status-success .modal-icon { text-shadow: 0 0 20px #2ecc71; }
 .status-wait .modal-icon { text-shadow: 0 0 20px #e74c3c; }
-
-/* --- FEEDBACK SPECIFIC --- */
 .star-rating { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
 .star-rating i { font-size: 1.8rem; color: rgba(255,255,255,0.3); cursor: pointer; transition: 0.2s; }
 .star-rating i.active { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.6); }
